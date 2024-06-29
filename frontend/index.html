@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Builder</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+</head>
+<body>
+  <header>
+    <h1>Pipeline Builder</h1>
+    <nav class="navbar">
+      <button id="generate-yaml">Generate YAML</button>
+      <button id="export-yaml">Export YAML</button>
+      <input type="file" id="import-yaml" style="display:none;">
+      <label for="import-yaml" class="import-button">Import YAML</label>
+    </nav>
+  </header>
+  <main class="container">
+    <aside class="palette-section">
+      <div class="palette">
+        <h3>Pre-defined</h3>
+        <div class="block build" draggable="true" data-type="build" title="Build: Compiles your code">Build</div>
+        <div class="block test" draggable="true" data-type="test" title="Test: Runs automated tests">Test</div>
+        <div class="block release" draggable="true" data-type="release" title="Release: Prepares a release">Release</div>
+        <div class="block deploy" draggable="true" data-type="deploy" title="Deploy: Deploys the application">Deploy</div>
+        <div class="block webhook" draggable="true" data-type="webhook" title="Webhook: Triggers a webhook">Webhook</div>
+        <div class="block scan" draggable="true" data-type="scan" title="Scan: Scans the code for vulnerabilities">Scan</div>
+      </div>
+      <div class="palette">
+        <h3>Compliance</h3>
+        <div class="block sast" draggable="true" data-type="sast" title="SAST: Static Application Security Testing">SAST</div>
+        <div class="block dast" draggable="true" data-type="dast" title="DAST: Dynamic Application Security Testing">DAST</div>
+        <div class="block license" draggable="true" data-type="license" title="License Check: Checks for license compliance">License Check</div>
+      </div>
+    </aside>
+    <section class="main-section">
+      <div class="pipeline">
+        <h3>Drag Area</h3>
+        <div class="dropzone" id="pipeline-dropzone"></div>
+      </div>
+      <div class="output">
+        <h3>Example YAML Output</h3>
+        <pre id="yaml-output" class="hljs"></pre>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Structure -->
+  <div id="blockModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Edit Block</h2>
+      <label for="block-name">Job Name:</label>
+      <input type="text" id="block-name" />
+      <small>Example: build-job, test-job</small>
+      <label for="block-script">Script:</label>
+      <textarea id="block-script" rows="5" cols="50"></textarea>
+      <small>Example: echo 'Running tests'</small>
+      <label for="block-image">Image:</label>
+      <input type="text" id="block-image" />
+      <small>Example: node:14</small>
+      <label for="block-tags">Tags:</label>
+      <input type="text" id="block-tags" />
+      <small>Example: docker, test</small>
+      <label for="block-artifacts">Artifacts:</label>
+      <input type="text" id="block-artifacts" />
+      <small>Example: coverage/, dist/</small>
+      <label for="block-when">When:</label>
+      <select id="block-when">
+        <option value="on_success">on_success</option>
+        <option value="on_failure">on_failure</option>
+        <option value="always">always</option>
+        <option value="manual">manual</option>
+      </select>
+      <small>Example: on_success</small>
+      <label for="block-only">Only:</label>
+      <input type="text" id="block-only" />
+      <small>Example: master, tags</small>
+      <label for="block-needs">Needs:</label>
+      <select id="block-needs" multiple></select>
+      <small>Select jobs this job depends on</small>
+      <button id="save-block">Save</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

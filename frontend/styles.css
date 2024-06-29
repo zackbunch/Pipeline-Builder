@@ -1,0 +1,259 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f8; /* Light gray background */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  background-color: #003366; /* Dark blue */
+  padding: 20px;
+  text-align: center;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  padding: 100px 20px 20px 20px; /* Add padding top to accommodate fixed header */
+}
+
+.palette-section {
+  position: fixed;
+  top: 100px; /* Adjust to accommodate fixed header */
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px;
+}
+
+.palette {
+  border: 1px solid #d1d5db; /* Light gray border */
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 340px; /* Adjust to accommodate fixed palette-section */
+  margin-right: 20px;
+}
+
+.pipeline, .output {
+  border: 1px solid #d1d5db; /* Light gray border */
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.palette h3, .pipeline h3, .output h3 {
+  color: #003366; /* Dark blue */
+  margin-bottom: 15px;
+}
+
+.block {
+  border: 1px solid #003366; /* Dark blue border */
+  background-color: #e7ebf0; /* Light blue background */
+  color: #003366; /* Dark blue text */
+  padding: 10px;
+  margin: 5px 0;
+  cursor: grab;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.block.draggable {
+  position: absolute;
+}
+
+.block.build {
+  background-color: #004080; /* Northrop Grumman blue */
+  color: white;
+}
+
+.block.test {
+  background-color: #0059b3; /* Medium blue */
+  color: white;
+}
+
+.block.release {
+  background-color: #0073e6; /* Lighter blue */
+  color: white;
+}
+
+.block.deploy {
+  background-color: #3399ff; /* Light blue */
+  color: white;
+}
+
+.block.webhook {
+  background-color: #66b2ff; /* Even lighter blue */
+  color: white;
+}
+
+.block.scan {
+  background-color: #99ccff; /* Very light blue */
+  color: white;
+}
+
+.block.sast {
+  background-color: #004080; /* Northrop Grumman blue */
+  color: white;
+}
+
+.block.dast {
+  background-color: #0059b3; /* Medium blue */
+  color: white;
+}
+
+.block.license {
+  background-color: #0073e6; /* Lighter blue */
+color: white;
+}
+
+.dropzone {
+border: 2px dashed #d1d5db; /* Light gray border /
+background-color: #f9fafb; / Very light gray background */
+padding: 20px;
+min-height: 400px;
+border-radius: 8px;
+position: relative;
+flex-grow: 1;
+}
+
+button {
+padding: 10px 20px;
+font-size: 16px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+background-color: #003366; /* Dark blue */
+color: #fff;
+transition: background-color 0.3s;
+}
+
+button:hover {
+background-color: #002244; /* Darker blue */
+}
+
+pre {
+background-color: #ffffff; /* White background */
+padding: 20px;
+margin: 20px 0;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+white-space: pre-wrap;
+width: 100%;
+max-width: 1000px;
+overflow-x: auto;
+}
+
+/* Modal styles */
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+background-color: #ffffff; /* White background /
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #d1d5db; / Light gray border */
+width: 80%;
+max-width: 500px;
+border-radius: 8px;
+}
+
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+label {
+display: block;
+margin-top: 10px;
+}
+
+small {
+display: block;
+margin-top: 5px;
+color: #555;
+}
+
+input, select, textarea {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+
+.import-button {
+display: inline-block;
+padding: 10px 20px;
+font-size: 16px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+background-color: #003366; /* Dark blue */
+color: #fff;
+transition: background-color 0.3s;
+text-align: center;
+line-height: normal;
+}
+
+.import-button:hover {
+background-color: #002244; /* Darker blue */
+}
