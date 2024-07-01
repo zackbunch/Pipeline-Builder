@@ -1,6 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f6f8; /* Light gray background */
+  background-color: #fafafa; /* Light gray background */
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,7 +10,7 @@ body {
 
 header {
   width: 100%;
-  background-color: #222222; /* GitLab dark gray */
+  background-color: #2f2e3e; /* GitLab dark purple */
   padding: 20px;
   text-align: center;
   color: white;
@@ -34,16 +34,16 @@ header h1 {
 }
 
 .navbar a {
-  background-color: #555555; /* GitLab medium gray */
   color: white;
-  padding: 10px 20px;
   text-decoration: none;
+  padding: 10px 20px;
+  background-color: #e24329; /* GitLab orange */
   border-radius: 4px;
   transition: background-color 0.3s;
 }
 
 .navbar a:hover {
-  background-color: #444444; /* GitLab darker gray */
+  background-color: #c42d1c; /* Darker GitLab orange */
 }
 
 .container {
@@ -91,14 +91,14 @@ header h1 {
 }
 
 .palette h3, .pipeline h3, .output h3 {
-  color: #222222; /* GitLab dark gray */
+  color: #2f2e3e; /* GitLab dark purple */
   margin-bottom: 15px;
 }
 
 .block {
-  border: 1px solid #222222; /* GitLab dark gray border */
-  background-color: #e7ebf0; /* Light gray background */
-  color: #222222; /* GitLab dark gray text */
+  border: 1px solid #2f2e3e; /* GitLab dark purple border */
+  background-color: #e0e0e0; /* Light gray background */
+  color: #2f2e3e; /* GitLab dark purple text */
   padding: 10px;
   margin: 5px 0;
   cursor: grab;
@@ -115,58 +115,61 @@ header h1 {
 }
 
 .block.build {
-  background-color: #fa4d56; /* GitLab red */
+  background-color: #e24329; /* GitLab orange */
   color: white;
 }
 
 .block.test {
-  background-color: #ffcd38; /* GitLab yellow */
-  color: black;
+  background-color: #fc6d26; /* GitLab light orange */
+  color: white;
 }
 
 .block.release {
-  background-color: #34d058; /* GitLab green */
+  background-color: #fca326; /* GitLab yellow */
   color: white;
 }
 
 .block.deploy {
-  background-color: #3197d6; /* GitLab blue */
+  background-color: #3e91f7; /* GitLab blue */
   color: white;
 }
 
 .block.webhook {
-  background-color: #6441a5; /* GitLab purple */
+  background-color: #00bfae; /* GitLab teal */
   color: white;
 }
 
 .block.scan {
-  background-color: #f66d9b; /* GitLab pink */
+  background-color: #37b24d; /* GitLab green */
   color: white;
 }
 
 .block.sast {
-  background-color: #fa4d56; /* GitLab red */
+  background-color: #e24329; /* GitLab orange */
   color: white;
 }
 
 .block.dast {
-  background-color: #ffcd38; /* GitLab yellow */
-  color: black;
+  background-color: #fc6d26; /* GitLab light orange */
+  color: white;
 }
 
 .block.license {
-  background-color: #34d058; /* GitLab green */
+  background-color: #fca326; /* GitLab yellow */
   color: white;
 }
 
 .dropzone {
   border: 2px dashed #d1d5db; /* Light gray border */
-  background-color: #f9fafb; /* Very light gray background */
+  background-color: #fafafa; /* Very light gray background */
   padding: 20px;
   min-height: 400px;
   border-radius: 8px;
   position: relative;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 button {
@@ -175,13 +178,13 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #222222; /* GitLab dark gray */
+  background-color: #e24329; /* GitLab orange */
   color: #fff;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #111111; /* GitLab darker gray */
+  background-color: #c42d1c; /* Darker GitLab orange */
 }
 
 pre {
@@ -260,7 +263,7 @@ input, select, textarea {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #222222; /* GitLab dark gray */
+  background-color: #e24329; /* GitLab orange */
   color: #fff;
   transition: background-color 0.3s;
   text-align: center;
@@ -268,7 +271,7 @@ input, select, textarea {
 }
 
 .import-button:hover {
-  background-color: #111111; /* GitLab darker gray */
+  background-color: #c42d1c; /* Darker GitLab orange */
 }
 
 /* Styles for SYAC Multi */
@@ -302,7 +305,7 @@ input, select, textarea {
 /* Dragover styling */
 .syac-cell.dragover {
   background-color: #e0e0e0;
-  border-color: #222222; /* GitLab dark gray */
+  border-color: #0073e6;
 }
 
 .modal-content label {
