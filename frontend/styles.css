@@ -10,7 +10,7 @@ body {
 
 header {
   width: 100%;
-  background-color: #003366; /* Dark blue */
+  background-color: #222222; /* GitLab dark gray */
   padding: 20px;
   text-align: center;
   color: white;
@@ -31,6 +31,19 @@ header h1 {
   justify-content: center;
   gap: 10px;
   margin-top: 10px;
+}
+
+.navbar a {
+  background-color: #555555; /* GitLab medium gray */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+  background-color: #444444; /* GitLab darker gray */
 }
 
 .container {
@@ -78,14 +91,14 @@ header h1 {
 }
 
 .palette h3, .pipeline h3, .output h3 {
-  color: #003366; /* Dark blue */
+  color: #222222; /* GitLab dark gray */
   margin-bottom: 15px;
 }
 
 .block {
-  border: 1px solid #003366; /* Dark blue border */
-  background-color: #e7ebf0; /* Light blue background */
-  color: #003366; /* Dark blue text */
+  border: 1px solid #222222; /* GitLab dark gray border */
+  background-color: #e7ebf0; /* Light gray background */
+  color: #222222; /* GitLab dark gray text */
   padding: 10px;
   margin: 5px 0;
   cursor: grab;
@@ -102,47 +115,47 @@ header h1 {
 }
 
 .block.build {
-  background-color: #004080; /* Northrop Grumman blue */
+  background-color: #fa4d56; /* GitLab red */
   color: white;
 }
 
 .block.test {
-  background-color: #0059b3; /* Medium blue */
-  color: white;
+  background-color: #ffcd38; /* GitLab yellow */
+  color: black;
 }
 
 .block.release {
-  background-color: #0073e6; /* Lighter blue */
+  background-color: #34d058; /* GitLab green */
   color: white;
 }
 
 .block.deploy {
-  background-color: #3399ff; /* Light blue */
+  background-color: #3197d6; /* GitLab blue */
   color: white;
 }
 
 .block.webhook {
-  background-color: #66b2ff; /* Even lighter blue */
+  background-color: #6441a5; /* GitLab purple */
   color: white;
 }
 
 .block.scan {
-  background-color: #99ccff; /* Very light blue */
+  background-color: #f66d9b; /* GitLab pink */
   color: white;
 }
 
 .block.sast {
-  background-color: #004080; /* Northrop Grumman blue */
+  background-color: #fa4d56; /* GitLab red */
   color: white;
 }
 
 .block.dast {
-  background-color: #0059b3; /* Medium blue */
-  color: white;
+  background-color: #ffcd38; /* GitLab yellow */
+  color: black;
 }
 
 .block.license {
-  background-color: #0073e6; /* Lighter blue */
+  background-color: #34d058; /* GitLab green */
   color: white;
 }
 
@@ -162,13 +175,13 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #003366; /* Dark blue */
+  background-color: #222222; /* GitLab dark gray */
   color: #fff;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #002244; /* Darker blue */
+  background-color: #111111; /* GitLab darker gray */
 }
 
 pre {
@@ -247,7 +260,7 @@ input, select, textarea {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #003366; /* Dark blue */
+  background-color: #222222; /* GitLab dark gray */
   color: #fff;
   transition: background-color 0.3s;
   text-align: center;
@@ -255,7 +268,7 @@ input, select, textarea {
 }
 
 .import-button:hover {
-  background-color: #002244; /* Darker blue */
+  background-color: #111111; /* GitLab darker gray */
 }
 
 /* Styles for SYAC Multi */
@@ -289,7 +302,7 @@ input, select, textarea {
 /* Dragover styling */
 .syac-cell.dragover {
   background-color: #e0e0e0;
-  border-color: #0073e6;
+  border-color: #222222; /* GitLab dark gray */
 }
 
 .modal-content label {

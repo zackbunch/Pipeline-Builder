@@ -330,6 +330,140 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
+  function updateYamlOutput() {
+    const blocks = Array.from(elements.dropzone.querySelectorAll('.block')).map((block, index) => ({
+      id: `block-${index}`,
+      type: block.dataset.type,
+      name: block.dataset.name,
+      data: { label: block.textContent },
+      position: {
+        x: parseInt(block.style.left, 10),
+        y: parseInt(block.style.top, 10),
+      },
+      script: block.dataset.script || `echo ${block.textContent}`,
+      image: block.dataset.image,
+      tags: block.dataset.tags ? block.dataset.tags.split(',') : [],
+      artifacts: block.dataset.artifacts ? block.dataset.artifacts.split(',') : [],
+      when: block.dataset.when,
+      only: block.dataset.only ? block.dataset.only.split(',') : [],
+      needs: block.dataset.needs ? block.dataset.needs.split(',') : [],
+      variables: block.dataset.variables ? block.dataset.variables.split(',') : []
+    }));
+
+    blocks.sort((a, b) => a.position.y - b.position.y);
+
+    const stages = [];
+    const jobs = {};
+
+    blocks.forEach(block => {
+      if (!stages.includes(block.type)) {
+        stages.push(block.type);
+      }
+      jobs[block.name] = {
+        stage: block.type,
+        script: block.script.split('\n'),
+        image: block.image,
+        tags: block.tags,
+        artifacts: {
+          paths: block.artifacts
+        },
+        when: block.when,
+        only: block.only,
+        needs: block.needs,
+        variables: block.variables
+      };
+
+      if (block.querySelector) {
+        const subBlocks = Array.from(block.querySelectorAll('.sub-block'));
+        if (subBlocks.length > 0) {
+          subBlocks.forEach(subBlock => {
+            jobs[subBlock.dataset.name] = {
+              stage: block.dataset.type,
+              script: subBlock.dataset.script.split('\n'),
+              image: subBlock.dataset.image,
+              tags: subBlock.dataset.tags,
+              artifacts: {
+                paths: subBlock.dataset.artifacts
+              },
+              when: subBlock.dataset.when,
+              only: subBlock.dataset.only,
+              needs: subBlock.dataset.needs,
+              variables: subBlock.dataset.variables
+            };
+          });
+        }
+      }
+    });
+
+    const yamlData = { stages, jobs };
+    elements.yamlOutput.textContent = jsyaml.dump(yamlData);
+    hljs.highlightBlock(elements.yamlOutput);
+  }
+
+  function openModal(block) {
+    console.log('Opening modal for block:', block.dataset);
+    currentBlock = block;
+    elements.blockNameInput.value = block.dataset.name || '';
+    elements.blockScriptInput.value = block.dataset.script || `echo ${block.textContent}`;
+    elements.blockImageInput.value = block.dataset.image || '';
+    elements.blockTagsInput.value = block.dataset.tags || '';
+    elements.blockArtifactsInput.value = block.dataset.artifacts || '';
+    elements.blockWhenInput.value = block.dataset.when || 'on_success';
+    elements.blockOnlyInput.value = block.dataset.only || '';
+    elements.blockVariablesInput.value = block.dataset.variables || '';
+    elements.blockNeedsInput.innerHTML = '';
+
+    const existingNeeds = block.dataset.needs ? block.dataset.needs.split(',') : [];
+    Array.from(elements.dropzone.querySelectorAll('.block')).forEach(b => {
+      if (b !== block) {
+        const option = document.createElement('option');
+        option.value = b.dataset.name;
+        option.textContent = b.dataset.name;
+        if (existingNeeds.includes(option.value)) {
+          option.selected = true;
+        }
+        elements.blockNeedsInput.appendChild(option);
+      }
+    });
+    elements.modal.style.display = "block";
+  }
+
+  function handleModalClose() {
+    elements.modal.style.display = "none";
+  }
+
+  function handleSaveBlock() {
+    console.log('Saving block:', currentBlock);
+    if (currentBlock) {
+      currentBlock.dataset.name = elements.blockNameInput.value;
+      currentBlock.dataset.script = elements.blockScriptInput.value;
+      currentBlock.dataset.image = elements.blockImageInput.value;
+      currentBlock.dataset.tags = elements.blockTagsInput.value;
+      currentBlock.dataset.artifacts = elements.blockArtifactsInput.value;
+      currentBlock.dataset.when = elements.blockWhenInput.value;
+      currentBlock.dataset.only = elements.blockOnlyInput.value;
+      currentBlock.dataset.needs = Array.from(elements.blockNeedsInput.selectedOptions).map(option => option.value).join(',');
+      currentBlock.dataset.variables = elements.blockVariablesInput.value;
+      updateYamlOutput();
+    }
+    handleModalClose();
+  }
+
+  function handleDeleteBlock() {
+    console.log('Deleting block:', currentBlock);
+    if (currentBlock) {
+      currentBlock.remove();
+      updateYamlOutput();
+    }
+    handleModalClose();
+  }
+
+  function handleWindowClick(event) {
+    if (event.target == elements.modal) {
+      handleModalClose();
+    }
+  }
+
   function updateConnections() {
     // Clear existing lines
     lines.forEach(line => line.remove());
