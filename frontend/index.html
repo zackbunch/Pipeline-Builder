@@ -6,15 +6,18 @@
   <title>Pipeline Builder</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leader-line"></script>
 </head>
 <body>
   <header>
     <h1>Pipeline Builder</h1>
     <nav class="navbar">
       <button id="generate-yaml">Generate YAML</button>
-      <button id="export-yaml">Export YAML</button>
-      <input type="file" id="import-yaml" style="display:none;">
-      <label for="import-yaml" class="import-button">Import YAML</label>
+      <button id="save-config">Save Configuration</button>
+      <button id="load-config">Load Configuration</button>
+      <button id="toggle-palette">Toggle Palette</button>
     </nav>
   </header>
   <main class="container">
@@ -27,6 +30,8 @@
         <div class="block deploy" draggable="true" data-type="deploy" title="Deploy: Deploys the application">Deploy</div>
         <div class="block webhook" draggable="true" data-type="webhook" title="Webhook: Triggers a webhook">Webhook</div>
         <div class="block scan" draggable="true" data-type="scan" title="Scan: Scans the code for vulnerabilities">Scan</div>
+        <div class="block syac" draggable="true" data-type="syac" title="SYAC: Special job for compliance">SYAC</div>
+        <div class="block syac-multi" draggable="true" data-type="syac-multi" title="SYAC Multi: Multiple SYAC jobs">SYAC Multi</div>
       </div>
       <div class="palette">
         <h3>Compliance</h3>
@@ -53,22 +58,22 @@
       <span class="close">&times;</span>
       <h2>Edit Block</h2>
       <label for="block-name">Job Name:</label>
-      <input type="text" id="block-name" />
+      <input type="text" id="block-name" required />
       <small>Example: build-job, test-job</small>
       <label for="block-script">Script:</label>
-      <textarea id="block-script" rows="5" cols="50"></textarea>
+      <textarea id="block-script" rows="5" cols="50" required></textarea>
       <small>Example: echo 'Running tests'</small>
       <label for="block-image">Image:</label>
-      <input type="text" id="block-image" />
+      <input type="text" id="block-image" required />
       <small>Example: node:14</small>
       <label for="block-tags">Tags:</label>
-      <input type="text" id="block-tags" />
+      <input type="text" id="block-tags" required />
       <small>Example: docker, test</small>
       <label for="block-artifacts">Artifacts:</label>
-      <input type="text" id="block-artifacts" />
+      <input type="text" id="block-artifacts" required />
       <small>Example: coverage/, dist/</small>
       <label for="block-when">When:</label>
-      <select id="block-when">
+      <select id="block-when" required>
         <option value="on_success">on_success</option>
         <option value="on_failure">on_failure</option>
         <option value="always">always</option>
@@ -76,17 +81,19 @@
       </select>
       <small>Example: on_success</small>
       <label for="block-only">Only:</label>
-      <input type="text" id="block-only" />
+      <input type="text" id="block-only" required />
       <small>Example: master, tags</small>
       <label for="block-needs">Needs:</label>
       <select id="block-needs" multiple></select>
       <small>Select jobs this job depends on</small>
+      <label for="block-variables">Variables:</label>
+      <input type="text" id="block-variables" required />
+      <small>Example: VAR1=value1, VAR2=value2</small>
       <button id="save-block">Save</button>
+      <button id="delete-block">Delete</button>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

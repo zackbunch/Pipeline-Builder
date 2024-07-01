@@ -10,6 +10,13 @@ class Block(BaseModel):
     type: str
     data: dict
     position: dict
+    script: str
+    image: str
+    tags: list[str]
+    artifacts: list[str]
+    when: str
+    only: list[str]
+    needs: list[str]
 
 class Edge(BaseModel):
     source: str
@@ -30,7 +37,13 @@ async def generate_yaml(pipeline: Pipeline):
             stages.append(block_type)
         jobs[block.id] = {
             'stage': block_type,
-            'script': f'echo {block_type}'
+            'script': block.script.split('\n'),
+            'image': block.image,
+            'tags': block.tags,
+            'artifacts': {'paths': block.artifacts},
+            'when': block.when,
+            'only': block.only,
+            'needs': block.needs
         }
 
     for edge in pipeline.edges:
